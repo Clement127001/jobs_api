@@ -40,4 +40,10 @@ userSchema.methods.createJWT = function () {
   );
 };
 
+userSchema.methods.comparePassword = async function (userPassword) {
+  const isPasswordmatch = await bcrypt.compare(userPassword, this.password);
+
+  return isPasswordmatch;
+};
+
 module.exports = mongoose.model("User", userSchema);
