@@ -12,7 +12,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password)
-    throw new BadRequestError("Please provide tthe valid credentials");
+    throw new BadRequestError("Please provide the valid credentials");
 
   const foundUser = await user.findOne({ email });
   if (!foundUser) throw new UnauthenticatedError("Invalid Email");

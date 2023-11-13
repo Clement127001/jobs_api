@@ -4,7 +4,6 @@ const { BadRequestError, NotFoundError } = require("../errors");
 
 const getAllJobs = async (req, res) => {
   const jobs = await Job.find({ createdBy: req.user.userId }).sort("createdAt");
-
   res.status(StatusCodes.OK).json({ jobs, count: jobs.length });
 };
 
@@ -15,7 +14,6 @@ const getJob = async (req, res) => {
   } = req;
 
   const job = await Job.findOne({ _id: jobId, createdBy: userId });
-
   if (!job) throw new NotFoundError(`No job found with id: ${jobId}`);
 
   res.status(StatusCodes.OK).json({ job });
@@ -41,7 +39,6 @@ const updateJob = async (req, res) => {
     req.body,
     { new: true, runValidators: true }
   );
-
   if (!job) throw new NotFoundError(`No job found with id:${jobId}`);
 
   res.status(StatusCodes.OK).json({ job });
@@ -54,7 +51,6 @@ const deleteJob = async (req, res) => {
   } = req;
 
   const job = await Job.findOneAndRemove({ _id: jobId, createdBy: userId });
-
   if (!job) throw new NotFoundError(`No job found with id :${jobId}`);
 
   res.status(StatusCodes.OK).send("sucessfully deleted");
