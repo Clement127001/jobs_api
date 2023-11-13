@@ -21,7 +21,9 @@ const login = async (req, res) => {
   if (!isPasswordmatch) throw new UnauthenticatedError("Invalid Password");
 
   const token = foundUser.createJWT();
-  res.status(StatusCodes.OK).json({ user: { name: foundUser.name }, token });
+  res
+    .status(StatusCodes.OK)
+    .json({ user: { name: foundUser.name, userId: foundUser._id }, token });
 };
 
 module.exports = { register, login };
