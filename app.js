@@ -9,11 +9,13 @@ const connectDB = require("./db/connect");
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const authMiddleware = require("./middleware/authentication");
+const allowCrossDomain = require("./middleware/allow-cors");
 
 const authrouter = require("./routes/auth");
 const jobRouter = require("./routes/jobs");
 
 app.use(express.json());
+app.use(allowCrossDomain);
 // extra packages
 
 // routes
